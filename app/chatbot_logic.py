@@ -1,21 +1,23 @@
-from logic.rules import bmi_calculate, bmi_category, tdee_calculate, food_recommendation
+from logic.rules import bmi_calculate, bmi_category, tdee_calculate, food_recommendation, get_goal
 
-def handle_chat(input_user, data_user):
-    weight = data_user.get("Weight")
-    height = data_user.get("Height")
-    age = data_user.get("Age")
-    gender = data_user.get("Gender")
-    activity = data_user.get("Activity Level")
-    goal = data_user.get("goal")
-    if input_user.lower() == "bmi":
-        bmi = bmi_calculate(weight, height)
-        category = bmi_category(bmi)
-        return f"Your BMI : {bmi:2.f} ({category})"
-    elif input_user.lower() == "calorie deficit" :
-        tdee = tdee_calculate(weight, height, age, gender, activity)
-        calorie = food_recommendation(tdee, goal)
-        return f"Daily Calorie for {goal} weight : {calorie} kkal"
-    else :
-        return "Choose option BMI/Calorie"
+def process_input(data):
+    weight = data['weight']
+    height = data['height']
+    age = data['age']
+    gender = data['gender']
+    activity_level = data['activity_level']
+
+    bmi = bmi_calculate(weight, height)
+    category = bmi_category(bmi)
+    goal = get_goal(bmi)
+    tdee = tdee_calculate(weight, height, age, gender, activity_level)
+    food = food_recommendation(goal)
+    return {
+        'bmi' : bmi,
+        'category' : category,
+        'goal' : goal,
+        'tdee' : tdee,
+        'food' : food,
+    }
 
 

@@ -37,6 +37,12 @@ def caloried_deficit(tdee, goal):
     else:
         return tdee
     
+def get_goal(bmi):
+    if bmi < 18.5:
+        return "Weight Gain"
+    else : 
+        return "Weight Loss"
+    
 def food_recommendation(goal, path="../data/food.xlsx"):
     df = pd.read_excel(path, engine='openpyxl')
     
