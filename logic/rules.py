@@ -37,3 +37,6 @@ def caloried_deficit(tdee, goal):
     else:
         return tdee
     
+def food_recommendation(goal, path="../data/food.xlsx"):
+    df = pd.read_excel(path, engine='openpyxl')
+    
