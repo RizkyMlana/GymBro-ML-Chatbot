@@ -21,21 +21,13 @@ def tdee_calculate(weight, height, age, gender, activity_level):
         bmr = 10 * weight + 6.25 + height - 5 * age - 161
     
     activity_map = {
-        "low" : 1.2,
-        "moderate" : 1.55,
-        "high" : 1.9, 
+        
     }
     multiplier = activity_map.get(activity_level, 1.2)
     tdee = bmr * multiplier
     return round(tdee)
 
-def caloried_deficit(tdee, goal):
-    if goal == "naik":
-        return tdee + 500
-    elif goal == "turun":
-        return tdee - 500
-    else:
-        return tdee
+
     
 def get_goal(bmi):
     if bmi < 18.5:
@@ -44,5 +36,11 @@ def get_goal(bmi):
         return "Weight Loss"
     
 def food_recommendation(goal, path="../data/food.xlsx"):
-    df = pd.read_excel(path, engine='openpyxl')
+    df_food = pd.read_excel(path, engine='openpyxl')
+
+def exercise_recommendation(goal, path="../data/gym.xlsx"):
+    df_gym = pd.read_excel(path, engine='openpyxl')
+
+def equipment_recommendation(goal, path="../data/gym.xslx"):
+    df_gym = pd.read_excel(path, engine='openpyxl')
     

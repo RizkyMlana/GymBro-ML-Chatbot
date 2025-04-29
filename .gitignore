@@ -15,4 +15,5 @@ Thumbs.db
 .pytest_cache/
 .vscode/
 gradio_cached_examples/
+.gradio/
 data/
